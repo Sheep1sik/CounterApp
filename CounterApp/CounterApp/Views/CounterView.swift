@@ -10,9 +10,10 @@ import SnapKit
 
 class CounterView: UIView {
     
+    weak var delegate: CounterViewDelegate?
+    
     private let counterNumberLabel: UILabel = {
         let label = UILabel()
-        label.text = "0"
         label.textColor = .white
         label.font = .systemFont(ofSize: 45, weight: .bold)
         label.textAlignment = .center
@@ -46,6 +47,7 @@ class CounterView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
+        setTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -76,5 +78,26 @@ class CounterView: UIView {
             make.height.equalTo(30)
         }
     }
+    
+    func updateCountLabel(with counter: Int) {
+        counterNumberLabel.text = "\(counter)"
+    }
+    
+    //MARK: - Button Action
+    
+    private func setTarget() {
+        incrementButton.addTarget(self, action: #selector(didTapIncrementButton), for: .touchUpInside)
+        
+        decrementButton.addTarget(self, action: #selector(didTapDecrementButton), for: .touchUpInside)
+    }
+    
+    @objc private func didTapIncrementButton() {
+        delegate?.counterViewDidTapIncrementButton(self)
+    }
+    
+    @objc private func didTapDecrementButton() {
+        delegate?.counterViewDidTapDecrementButton(self)
+    }
 
+    
 }
