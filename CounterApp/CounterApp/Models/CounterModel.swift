@@ -18,4 +18,8 @@ class CounterModel {
     func decrement() {
         counter -= 1
     }
+    
+    func reset() {
+        counter = 0
+    }
 }

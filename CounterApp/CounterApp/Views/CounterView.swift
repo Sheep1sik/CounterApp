@@ -43,6 +43,17 @@ class CounterView: UIView {
         return button
     }()
     
+    private let reSetCounterButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("초기화", for: .normal)
+        button.backgroundColor = .gray
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
+        button.clipsToBounds = true
+        
+        return button
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,6 +69,7 @@ class CounterView: UIView {
         addSubview(counterNumberLabel)
         addSubview(incrementButton)
         addSubview(decrementButton)
+        addSubview(reSetCounterButton)
         
         counterNumberLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -77,6 +89,15 @@ class CounterView: UIView {
             make.width.equalTo(80)
             make.height.equalTo(30)
         }
+        
+        reSetCounterButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+            make.top.equalTo(counterNumberLabel.snp.bottom).offset(100)
+            
+        }
+        
     }
     
     func updateCountLabel(with counter: Int) {
@@ -89,6 +110,8 @@ class CounterView: UIView {
         incrementButton.addTarget(self, action: #selector(didTapIncrementButton), for: .touchUpInside)
         
         decrementButton.addTarget(self, action: #selector(didTapDecrementButton), for: .touchUpInside)
+        
+        reSetCounterButton.addTarget(self, action: #selector(didTapReSetButton), for: .touchUpInside)
     }
     
     @objc private func didTapIncrementButton() {
@@ -98,6 +121,8 @@ class CounterView: UIView {
     @objc private func didTapDecrementButton() {
         delegate?.counterViewDidTapDecrementButton(self)
     }
-
     
+    @objc private func didTapReSetButton() {
+        delegate?.counterViewDidTapReSetButton(self)
+    }
 }

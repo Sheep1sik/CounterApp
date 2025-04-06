@@ -10,6 +10,7 @@ import Combine
 
 class CounterViewController: UIViewController, CounterViewDelegate {
     
+    
     private let counterView = CounterView()
     private var model = CounterModel()
     private var cancellables = Set<AnyCancellable>()
@@ -41,6 +42,10 @@ class CounterViewController: UIViewController, CounterViewDelegate {
     
     func counterViewDidTapDecrementButton(_ counterView: CounterView) {
         model.decrement()
+    }
+    
+    func counterViewDidTapReSetButton(_ counterView: CounterView) {
+        model.reset()
     }
 
 }

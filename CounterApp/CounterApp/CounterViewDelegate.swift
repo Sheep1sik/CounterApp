@@ -10,4 +10,5 @@ import UIKit
 protocol CounterViewDelegate: AnyObject {
     func counterViewDidTapIncrementButton(_ counterView: CounterView)
     func counterViewDidTapDecrementButton(_ counterView: CounterView)
+    func counterViewDidTapReSetButton(_ counterView: CounterView)
 }
