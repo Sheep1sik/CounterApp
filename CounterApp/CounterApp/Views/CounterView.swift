@@ -10,14 +10,6 @@ import SnapKit
 
 class CounterView: UIView {
     
-    private lazy var counterHStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [decrementButton, counterNumberLabel, incrementButton])
-        stack.axis = .horizontal
-        stack.alignment = .center
-        
-        return stack
-    }()
-    
     private let counterNumberLabel: UILabel = {
         let label = UILabel()
         label.text = "0"
@@ -30,6 +22,7 @@ class CounterView: UIView {
     
     private let incrementButton: UIButton = {
         let button = UIButton()
+        button.setTitle("증가", for: .normal)
         button.backgroundColor = .blue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
@@ -40,6 +33,7 @@ class CounterView: UIView {
     
     private let decrementButton: UIButton = {
         let button = UIButton()
+        button.setTitle("감소", for: .normal)
         button.backgroundColor = .red
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
@@ -59,26 +53,28 @@ class CounterView: UIView {
     }
     
     private func setUI() {
-        addSubview(counterHStack)
+        addSubview(counterNumberLabel)
+        addSubview(incrementButton)
+        addSubview(decrementButton)
         
-        counterHStack.snp.makeConstraints{ make in
+        counterNumberLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
-        }
-        
-        counterNumberLabel.snp.makeConstraints{ make in
             make.width.equalTo(80)
         }
         
-        incrementButton.snp.makeConstraints{ make in
-            make.width.equalTo(80)
-            make.height.equalTo(30)
-            make.leading.equalToSuperview().offset(-32)
-        }
-        
-        decrementButton.snp.makeConstraints{ make in
+        incrementButton.snp.makeConstraints { make in
+            make.centerY.equalTo(counterNumberLabel)
+            make.leading.equalTo(counterNumberLabel.snp.trailing).offset(32)
             make.width.equalTo(80)
             make.height.equalTo(30)
-            make.leading.equalToSuperview().offset(32)
+        }
+        
+        decrementButton.snp.makeConstraints { make in
+            make.centerY.equalTo(counterNumberLabel)
+            make.trailing.equalTo(counterNumberLabel.snp.leading).offset(-32)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
         }
     }
+
 }
