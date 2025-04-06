@@ -33,7 +33,7 @@
 		E8E33F592DA2527E00DC41BD /* Exceptions for "CounterApp" folder in "CounterApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = E8E33F302DA2527900DC41BD /* CounterApp */;
 		};
